@@ -2,6 +2,9 @@ import { Sandbox } from '@e2b/code-interpreter';
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
 
+// Allow streaming responses up to 60 seconds
+export const maxDuration = 60;
+
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
