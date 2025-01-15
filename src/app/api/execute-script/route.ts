@@ -22,7 +22,6 @@ export async function POST(request: NextRequest) {
     });
 
     const generatedCode = completion.choices[0].message.content;
-    console.log("generated code:\n", generatedCode)
 
     if (!generatedCode) {
       return NextResponse.json(
@@ -35,8 +34,6 @@ export async function POST(request: NextRequest) {
     const sandbox = await Sandbox.create()
     const execution = await sandbox.runCode(generatedCode, { language: "python" })
     await sandbox.kill();
-
-    console.log(execution.logs)
 
     return NextResponse.json({
       success: true,

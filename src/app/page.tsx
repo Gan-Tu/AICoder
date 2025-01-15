@@ -39,6 +39,7 @@ export default function ExecutePage() {
         setError(data.error || 'Failed to execute script.');
       }
     } catch (err) {
+      console.error(err)
       setError('An error occurred while executing the script.');
     } finally {
       setLoading(false);
@@ -71,6 +72,7 @@ export default function ExecutePage() {
         setError(data.error || 'Failed to execute script.');
       }
     } catch (err) {
+      console.error(err)
       setError('An error occurred while executing the script.');
     } finally {
       setLoading(false);
