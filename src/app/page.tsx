@@ -1,32 +1,32 @@
-'use client'; 
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
-export default function ExecutePage() {
-  const [userPrompt, setUserPrompt] = useState('');
-  const [generatedCode, setGeneratedCode] = useState('');
-  const [output, setOutput] = useState('');
+export default function HomePage() {
+  const [userPrompt, setUserPrompt] = useState("");
+  const [generatedCode, setGeneratedCode] = useState("");
+  const [output, setOutput] = useState("");
   const [inputs, setInputs] = useState<string[]>([]);
   const [userInputs, setUserInputs] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
-    setGeneratedCode('');
-    setOutput('');
+    setError("");
+    setGeneratedCode("");
+    setOutput("");
 
     try {
-      const response = await fetch('/api/execute-script', {
-        method: 'POST',
+      const response = await fetch("/api/execute-script", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json"
         },
-        body: JSON.stringify({ userPrompt }),
+        body: JSON.stringify({ userPrompt })
       });
 
       const data = await response.json();
@@ -36,11 +36,11 @@ export default function ExecutePage() {
         setInputs(data.optionalInputs || []);
         setOutput(data.output);
       } else {
-        setError(data.error || 'Failed to execute script.');
+        setError(data.error || "Failed to execute script.");
       }
     } catch (err) {
-      console.error(err)
-      setError('An error occurred while executing the script.');
+      console.error(err);
+      setError("An error occurred while executing the script.");
     } finally {
       setLoading(false);
     }
@@ -52,16 +52,16 @@ export default function ExecutePage() {
 
   const handleExecution = async () => {
     setLoading(true);
-    setError('');
-    setOutput('');
+    setError("");
+    setOutput("");
 
     try {
-      const response = await fetch('/api/execute-script', {
-        method: 'POST',
+      const response = await fetch("/api/execute-script", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json"
         },
-        body: JSON.stringify({ userPrompt, inputs: userInputs }),
+        body: JSON.stringify({ userPrompt, inputs: userInputs })
       });
 
       const data = await response.json();
@@ -69,11 +69,11 @@ export default function ExecutePage() {
       if (data.success) {
         setOutput(data.output);
       } else {
-        setError(data.error || 'Failed to execute script.');
+        setError(data.error || "Failed to execute script.");
       }
     } catch (err) {
-      console.error(err)
-      setError('An error occurred while executing the script.');
+      console.error(err);
+      setError("An error occurred while executing the script.");
     } finally {
       setLoading(false);
     }
@@ -83,9 +83,9 @@ export default function ExecutePage() {
     <div className="min-h-screen bg-gray-100 py-10 px-4">
       <div className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md">
         <h1 className="text-2xl font-bold text-gray-800 mb-4">
-          Intelligent Script Executor
+          AI Coder (Python)
         </h1>
-        
+
         {/* --- Generate Script Form --- */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <textarea
@@ -100,7 +100,7 @@ export default function ExecutePage() {
             className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition"
             disabled={loading}
           >
-            {loading ? 'Processing...' : 'Generate Script'}
+            {loading ? "Processing..." : "Generate Script"}
           </button>
         </form>
 
@@ -130,7 +130,7 @@ export default function ExecutePage() {
                 onClick={handleExecution}
                 className="w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition"
               >
-                {loading ? 'Executing...' : 'Execute Script'}
+                {loading ? "Executing..." : "Execute Script"}
               </button>
             </form>
           </div>
