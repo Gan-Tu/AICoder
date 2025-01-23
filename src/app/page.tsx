@@ -33,8 +33,8 @@ export default function HomePage() {
 
       if (data.success) {
         setGeneratedCode(data.generatedCode);
-        setInputs(data.optionalInputs || []);
-        setOutput(data.output);
+        setInputs([]);
+        setOutput(data.output || data.stdout || data.stderr);
       } else {
         setError(data.error || "Failed to execute script.");
       }

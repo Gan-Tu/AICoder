@@ -52,7 +52,9 @@ export async function POST(request: NextRequest) {
       success: true,
       packages: script.packages || [],
       generatedCode: script.code,
-      output: execution.text || execution.logs.stdout.join('\n') || execution.logs.stderr.join('\n'),
+      stdout: execution.logs.stdout.join('\n'),
+      stderr: execution.logs.stderr.join('\n'),
+      output: execution.text
     });
   } catch (error) {
     console.error(error)
