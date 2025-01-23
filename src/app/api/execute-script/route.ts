@@ -18,14 +18,14 @@ export async function POST(request: NextRequest) {
     const completion = await openai.beta.chat.completions.parse({
       model: "gpt-4o-mini",
       messages: [
-        { role: "system", content: "You are a helpful assistant that can execute python code in a Jupyter notebook. Only respond with the code to be executed and nothing else. Strip backticks in code blocks. Prefer using packages that come with python by default. If new python packages are needed, list each package name in the `packages` output format that can be run individually using pip install. Leave `packages` output field empty if no new packages are needed." },
+        { role: "system", content: "You are a helpful assistant that can execute python code in a Jupyter notebook. Only respond with the code to be executed and nothing else. Strip backticks in code blocks. **IMPORTANT**: if any python packages imported do not come with python shell by default, list each package name on its own in the `packages` output format." },
         {
           role: "user",
           content: userPrompt,
         },
       ],
       response_format: zodResponseFormat(z.object({
-        packages: z.array(z.string()).describe("A list of python packages to install using pip install. Leave empty if no new packages are needed."),
+        packages: z.array(z.string()).describe("A list of python packages that are needed by import but don't come with Python by default. We will install these using pip install. Leave empty if no new packages are needed."),
         code: z.string().describe("The code snippet to execute in python shell."),
       }), "script"),
     });
@@ -50,6 +50,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
+      packages: script.packages || [],
       generatedCode: script.code,
       output: execution.text || execution.logs.stdout.join('\n') || execution.logs.stderr.join('\n'),
     });
