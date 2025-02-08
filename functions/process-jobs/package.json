@@ -1,0 +1,12 @@
+{
+  "name": "process-jobs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.0.0",
+    "@neondatabase/serverless": "^0.7.0",
+    "googleapis": "^129.0.0",
+    "jszip": "^3.10.0",
+    "openai": "^4.0.0"
+  }
+}

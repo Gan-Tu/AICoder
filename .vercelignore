@@ -1,0 +1,5 @@
+# Ignore Cloud Functions
+functions
+
+# Ignore node_modules
+node_modules
