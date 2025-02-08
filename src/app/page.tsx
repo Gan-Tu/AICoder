@@ -92,7 +92,7 @@ export default function HomePage() {
             value={userPrompt}
             onChange={(e) => setUserPrompt(e.target.value)}
             placeholder="Describe the script you want to execute..."
-            className="w-full p-4 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            className="w-full p-4 border rounded-lg shadow-xs focus:ring-2 focus:ring-blue-500 focus:outline-hidden"
             required
           />
           <button
@@ -121,7 +121,7 @@ export default function HomePage() {
                   <input
                     type="text"
                     onChange={(e) => handleInputChange(input, e.target.value)}
-                    className="w-full p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    className="w-full p-3 border rounded-lg shadow-xs focus:ring-2 focus:ring-blue-500 focus:outline-hidden"
                   />
                 </div>
               ))}
